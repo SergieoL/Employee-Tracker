@@ -18,6 +18,7 @@
 
 -View departments, roles, or employees, select the appropriate option the inquirer application
 
+<img width="675" alt="Screenshot" src="https://user-images.githubusercontent.com/98509170/166096296-2d817d8d-ad95-4ac7-9b58-c2d8d2641c1f.png">
 
 
 ## Credits

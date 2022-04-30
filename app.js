@@ -131,7 +131,7 @@ const updateEmployee = () => {
 }
 
 const viewDepartments = () => {
-    db.query(`SELECT name FROM department`, (err, rows) => {
+    db.query(`SELECT * FROM department`, (err, rows) => {
         console.table(rows);
         promptMenu();
     })

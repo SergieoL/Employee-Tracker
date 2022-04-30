@@ -131,7 +131,7 @@ const updateEmployee = () => {
 }
 
 const viewDepartments = () => {
-    db.query(`SELECT * FROM department`, (err, rows) => {
+    db.query(`SELECT name FROM department`, (err, rows) => {
         console.table(rows);
         promptMenu();
     })
@@ -180,7 +180,7 @@ const createRole = (title, salary, department_id) => {
 }
 
 const viewEmployees = () => {
-    const sql = `SELECT employee.*, role.title AS title, role.salary AS salary, department.name AS department
+    const sql = `SELECT employee.id, employee.first_name, employee.last_name, employee.role_id, role.title AS title, role.salary AS salary, department.name AS department
     FROM employee
     LEFT JOIN role ON employee.role_id = role.id
     LEFT JOIN department ON role.department_id = department.id;`;

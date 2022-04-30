@@ -30,7 +30,9 @@ const promptMenu = () => {
             addRole();
         } else if (choice === 'Add an employee'){
             addEmployee();
-        } else if (choice === 'Update an employee role')
+        } else if (choice === 'Update an employee role'){
+            updateEmployee();
+        }
     })
 }
 
@@ -107,6 +109,27 @@ const addEmployee = () => {
     })
 }
 
+const updateEmployee = () => {
+    return inquirer.prompt([
+        {
+            type: 'number',
+            name: 'employee_id',
+            message: 'Enter the employee ID you wish to update:'
+        },
+        {
+            type: 'number',
+            name: 'role_id',
+            message: 'Enter the new role ID for the employee:'
+        }
+    ])
+    .then(answers => {
+        const employee_id = answers.employee_id;
+        const role_id = answers.role_id;
+        console.log(employee_id, role_id);
+        updateEmployeeRole(role_id, employee_id);
+    })
+}
+
 const viewDepartments = () => {
     db.query(`SELECT * FROM department`, (err, rows) => {
         console.table(rows);
@@ -179,6 +202,21 @@ const createEmployee = (first_name, last_name, role_id, manager_id) => {
             return;
         }
         console.log('Employee added to database.');
+        promptMenu();
+    })
+}
+
+const updateEmployeeRole = (role_id, employee_id) => {
+    const sql = `UPDATE employee SET role_id = ?
+                WHERE id = ?`;
+    const params = [role_id, employee_id]
+    
+    db.query(sql, params, (err, result) => {
+        if (err) {
+            console.log(err);
+            return
+        }
+        console.log('Employee updated in database.');
         promptMenu();
     })
 }
